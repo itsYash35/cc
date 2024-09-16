@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYA AAP CHUTIYA HAI?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #00F260, #0575E6);
+            color: #fff;
+            text-align: center;
+        }
+        .container, .popup {
+            transition: all 0.5s ease-in-out;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        #yesBtn {
+            background-color: #ff6347;
+        }
+        #noBtn {
+            background-color: #ff4757;
+        }
+        /* Popup styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        .popup h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .popup input {
+            margin: 20px;
+        }
+        /* Styling for second page */
+        .secondPage {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #f2709c, #ff9472);
+            color: #fff;
+        }
+        .animate-icons {
+            font-size: 3rem;
+            margin-top: 20px;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        /* Memes container */
+        .memes {
+            margin-top: 30px;
+        }
+        .memes img {
+            width: 150px;
+            height: auto;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        /* No button trick */
+        #noBtn:hover {
+            position: absolute;
+            left: calc(100vw - 200px);
+            top: calc(100vh - 100px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- First page content -->
+    <div class="container">
+        <h1>KYA AAP CHUTIYA HAI?</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <!-- Popup content -->
+    <div class="popup" id="popup">
+        <h2>Aap agree karte hai ki aap chutiya hai?</h2>
+        <label>
+            <input type="checkbox" id="agreeCheck"> I Agree
+        </label>
+        <br>
+        <button id="confirmBtn" disabled>Confirm</button>
+    </div>
+
+    <!-- Second page content -->
+    <div class="secondPage">
+        <h1>Aap Chutiya Hai 😂</h1>
+        <div class="animate-icons">🤣 🐒 🤡</div>
+        <div class="memes">
+            <img src="4Vf0xDSAC0i4hPZw1ZwxPMqkDULTlw4465980.jpg">
+            <img src="chutiya-likha.gif" alt="Meme 2">
+            <img src="main-chutiya-hoon-main-chootiya-hoon.gif" alt="Meme 3">
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const container = document.querySelector('.container');
+        const popup = document.getElementById('popup');
+        const agreeCheck = document.getElementById('agreeCheck');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const secondPage = document.querySelector('.secondPage');
+
+        // Show popup on clicking "Yes"
+        yesBtn.addEventListener('click', function() {
+            popup.style.display = 'block';
+        });
+
+        // Enable confirm button when checkbox is checked
+        agreeCheck.addEventListener('change', function() {
+            confirmBtn.disabled = !agreeCheck.checked;
+        });
+
+        // Redirect to second page on confirm
+        confirmBtn.addEventListener('click', function() {
+            popup.style.display = 'none';
+            container.style.display = 'none';
+            secondPage.style.display = 'flex';
+        });
+
+        // Moving "No" button logic
+        noBtn.addEventListener('mouseenter', function() {
+            noBtn.style.position = 'absolute';
+            const randomX = Math.floor(Math.random() * (window.innerWidth - noBtn.clientWidth));
+            const randomY = Math.floor(Math.random() * (window.innerHeight - noBtn.clientHeight));
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+        });
+    </script>
+
+</body>
+</html>
